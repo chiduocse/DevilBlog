@@ -1,0 +1,9 @@
+$devil-black-primary: mat-palette($mat-grey, 700, 300, 900);
+$devil-black-accent: mat-palette($mat-blue-grey, 400);
+$devil-black-warn: mat-palette($mat-red, 500);
+
+$devil-black-theme: mat-dark-theme(
+  $devil-black-primary,
+  $devil-black-accent,
+  $devil-black-warn
+);

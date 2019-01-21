@@ -1,0 +1,36 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+@import "themes/default-theme.scss";
+@import 'themes/light-theme.scss';
+@import 'themes/black-theme.scss';
+@import 'themes/nature-theme.scss';
+
+@import "app/app.component-theme.scss";
+body {
+  margin: 0;
+}
+
+@mixin custom-components-theme($theme) {
+  @include devil-app-component-theme($theme);
+}
+
+.default-theme {
+  @include angular-material-theme($devil-theme);
+  @include custom-components-theme($devil-theme);
+}
+
+.light-theme {
+  @include angular-material-theme($devil-light-theme);
+  @include custom-components-theme($devil-light-theme);
+}
+
+.black-theme {
+  @include angular-material-theme($devil-black-theme);
+  @include custom-components-theme($devil-black-theme);
+}
+
+.nature-theme {
+  @include angular-material-theme($devil-nature-theme);
+  @include custom-components-theme($devil-nature-theme);
+}

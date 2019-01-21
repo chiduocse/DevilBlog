@@ -1,0 +1,13 @@
+<mat-sidenav-container class="devil-container">
+  <mat-sidenav #sidenav [mode]="mode.value">
+    <router-outlet name="devil-admin-sidenav"></router-outlet>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="page-wrap">
+    <div class="header">
+      <router-outlet name="devil-admin-toolbar"></router-outlet>
+    </div>
+    <div class="content"><router-outlet></router-outlet></div>
+    <router-outlet name="devil-admin-footer"></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

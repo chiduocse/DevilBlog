@@ -1,0 +1,32 @@
+.devil-toolbar {
+  width: 100%;
+}
+
+mat-toolbar {
+  fa-icon {
+    font-size: 24px;
+  }
+
+  .branding {
+    cursor: pointer;
+    overflow: hidden;
+    padding-top: 4px;
+    text-overflow: ellipsis;
+
+    img {
+      height: 48px;
+      margin: 0 10px 0 0;
+      vertical-align: middle;
+    }
+
+    span {
+      position: relative;
+      top: 3px;
+    }
+
+  }
+
+  .devil-spacer {
+    flex: 1 1 auto;
+  }
+}

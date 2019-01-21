@@ -1,0 +1,14 @@
+<div fxLayout="row" fxLayout.xs="column">
+  <mat-form-field fxFill [formGroup]="formGroup">
+    <mat-select
+      [placeholder]="config.label"
+      [formControlName]="config.name"
+      [multiple]="config.multiple"
+    >
+      <mat-option *ngFor="let option of config.options" [value]="option.value">
+        {{ option.value }}
+      </mat-option>
+    </mat-select>
+    <mat-error devilFormFieldError [fieldConfig]="config"></mat-error>
+  </mat-form-field>
+</div>

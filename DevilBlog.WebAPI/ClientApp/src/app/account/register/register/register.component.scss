@@ -1,0 +1,17 @@
+.register-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-container>* {
+    width: 100%;
+}
+
+.register-full-width {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.register-card {
+    max-width: 400px;
+}

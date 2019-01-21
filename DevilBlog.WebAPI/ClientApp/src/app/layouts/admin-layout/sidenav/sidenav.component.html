@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  Devil App
+</mat-toolbar>
+<p>
+  <mat-radio-group class="example-radio-group" [formControl]="mode">
+    <label>Mode:</label>
+    <mat-radio-button value="over">Over</mat-radio-button>
+    <mat-radio-button value="side">Side</mat-radio-button>
+    <mat-radio-button value="push">Push</mat-radio-button>
+  </mat-radio-group>
+</p>
+<mat-nav-list>
+  <mat-list-item>
+    <a routerLink="/topics" routerLinkActive="active">
+      <mat-icon>home</mat-icon>Topic</a
+    >
+  </mat-list-item>
+  <mat-list-item>
+    <a> <mat-icon>home</mat-icon>Item 2</a>
+  </mat-list-item>
+  <mat-list-item>
+    <a> <mat-icon>home</mat-icon>Item 3</a>
+  </mat-list-item>
+</mat-nav-list>

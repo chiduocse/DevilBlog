@@ -1,0 +1,49 @@
+<mat-card>
+  <mat-card-header  fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-card-title>
+      <h2>User Manager</h2>
+    </mat-card-title>
+    <button mat-fab color="primary" matTooltip="Create new user" matTooltipPosition="above" (click)="openDialog()">
+      <mat-icon>person_add</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fullName">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Full Name </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let user"> {{user.fullName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="userName">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> User Name </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let user"> {{user.userName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons>
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,12 @@
+<div [formGroup]="formGroup">
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    (click)="config.onSubmit(formGroup)"
+    [disabled]="config.disabled"
+  >
+    <mat-icon *ngIf="config.icon">{{ config.icon }}</mat-icon>
+    {{ config.label }}
+  </button>
+</div>

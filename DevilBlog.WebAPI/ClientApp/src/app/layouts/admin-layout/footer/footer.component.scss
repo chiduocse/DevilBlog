@@ -1,0 +1,38 @@
+footer {
+    mat-toolbar {
+        min-height: 32px;
+        mat-toolbar-row {
+            height: 32px;
+        }
+    }
+    span {
+        padding: 0 16px 0 0;
+    }
+    small {
+        font-size: 10px;
+    }
+    a {
+        color: #eee;
+        font-size: 12px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+            padding: 0;
+        }
+        &:hover {
+            span {
+                text-decoration: underline;
+            }
+        }
+    }
+    mat-icon {
+        margin-right: 4px;
+        width: 20px;
+        height: 20px;
+        &.material-icons {
+            font-size: 20px;
+        }
+    }
+}

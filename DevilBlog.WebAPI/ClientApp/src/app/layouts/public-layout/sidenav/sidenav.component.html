@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="branding"><img [src]="logo" /><span>Devil App</span></div>
+</mat-toolbar>
+<mat-nav-list>
+  <mat-list-item (click)="toggleSidenav()">
+    <a routerLink="/admin/topics" routerLinkActive="active">
+      <mat-icon>home</mat-icon>Item 1</a
+    >
+  </mat-list-item>
+  <mat-list-item (click)="toggleSidenav()">
+    <a> <mat-icon>home</mat-icon>Item 2</a>
+  </mat-list-item>
+  <mat-list-item (click)="toggleSidenav()">
+    <a> <mat-icon>home</mat-icon>Item 3</a>
+  </mat-list-item>
+</mat-nav-list>

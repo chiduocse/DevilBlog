@@ -1,0 +1,11 @@
+<div class="avatarWrapper">
+  <div class="avatar cursor-pointer">
+    <div class="uploadOverlay">
+      <mat-icon (click)="onClick()">cloud_upload</mat-icon>
+    </div>
+    <img mat-card-avatar class="avatar-user" [src]="selectedImage?.url || '../../../../assets/images/avatar/user_avatar_default.png'"
+      alt="Avatar">
+  </div>
+  <input id="fileUpload" #fileUpload="ngModel" ngModel type="file" style="display:none;">
+  <mat-card-title style="text-align: center; color: #00FF00">Profile picture</mat-card-title>
+</div>

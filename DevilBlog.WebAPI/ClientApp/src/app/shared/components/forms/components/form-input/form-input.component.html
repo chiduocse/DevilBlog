@@ -1,0 +1,13 @@
+<div fxLayout="row" fxLayout.xs="column">
+  <mat-form-field fxFill appearance="outline" [formGroup]="formGroup">
+    <mat-label>{{ config.label }}</mat-label>
+    <input
+      matInput
+      [id]="config.name"
+      [formControlName]="config.name"
+      [placeholder]="config.label"
+      [type]="config.type"
+    />
+    <mat-error devilFormFieldError [fieldConfig]="config"></mat-error>
+  </mat-form-field>
+</div>

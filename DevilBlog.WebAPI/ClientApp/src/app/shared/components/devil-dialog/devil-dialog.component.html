@@ -1,0 +1,22 @@
+<div class="container">
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+  <mat-dialog-content class="mat-typography">
+    <devil-form
+      *ngIf="data.config"
+      [config]="data.config"
+      #devilForm="devilForm"
+    >
+    </devil-form>
+    <p *ngIf="!data.config">{{ data.message }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
+    <button
+      mat-button
+      cdkFocusInitial
+      (click)="yes($event)"
+    >
+      Yes
+    </button>
+  </mat-dialog-actions>
+</div>

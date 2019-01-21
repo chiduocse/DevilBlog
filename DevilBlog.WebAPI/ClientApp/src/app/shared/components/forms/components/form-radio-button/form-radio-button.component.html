@@ -1,0 +1,13 @@
+<div fxLayout="row" fxLayout.xs="column" [formGroup]="formGroup">
+  <mat-label class="radio-label-padding">{{ config.label }}:</mat-label>
+  <mat-radio-group [formControlName]="config.name">
+    <mat-radio-button
+      class="radio-item-padding"
+      *ngFor="let item of config.options"
+      [value]="item.value"
+    >
+      {{ item.value }}
+    </mat-radio-button>
+    <mat-error devilFormFieldError [fieldConfig]="config"></mat-error>
+  </mat-radio-group>
+</div>

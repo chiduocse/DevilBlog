@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DevilBlog.Business\DevilBlog.Business.csproj" />
+    <ProjectReference Include="..\DevilBlog.Dto\DevilBlog.Dto.csproj" />
+    <ProjectReference Include="..\DevilBlog.Models\DevilBlog.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
+  </ItemGroup>
+
+</Project>

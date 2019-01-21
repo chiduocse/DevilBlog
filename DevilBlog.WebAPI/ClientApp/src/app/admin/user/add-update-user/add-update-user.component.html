@@ -1,0 +1,106 @@
+<h1 mat-dialog-title>Create User</h1>
+<form name="userForm" #userForm="ngForm" (ngSubmit)="save(userForm)">
+  <mat-dialog-content fxLayout="row" fxLayout.xs="column">
+    <div fxFlex="40">
+      <devil-upload-avatar (avatar)="avatarChange($event)"></devil-upload-avatar>
+    </div>
+    <div fxLayout="column" fxFlex="60">
+      <mat-form-field appearance="outline" class="register-full-width">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" name="userName" [(ngModel)]="user.userName" #userName="ngModel" minlength="5" maxlength="50"
+          [pattern]="patternUsername" required>
+        <mat-hint align="end">{{userName.value?.length || 0}}/50</mat-hint>
+        <mat-error *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+          <mat-error *ngIf="userName.invalid && userName.errors['required']">Username is required (minimum 5 characters)</mat-error>
+          <mat-error *ngIf="userName.invalid && userName.errors['pattern']">Username can only contain letters, digits, hyphens (-), underscores (_), minimum 5 characters</mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="register-full-width">
+        <mat-label>First name</mat-label>
+        <input matInput placeholder="First name" name="firstName" [(ngModel)]="user.firstName" #firstName="ngModel" maxlength="50"
+          required>
+        <mat-hint align="end">{{firstName.value?.length || 0}}/50</mat-hint>
+        <mat-error *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"> First name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="register-full-width">
+        <mat-label>Last name</mat-label>
+        <input matInput placeholder="Last name" name="lastName" [(ngModel)]="user.lastName" #lastName="ngModel" maxlength="50" required>
+        <mat-hint align="end">{{lastName.value?.length || 0}}/50</mat-hint>
+        <mat-error *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"> Last name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="register-full-width">
+        <mat-label>E-mail address</mat-label>
+        <input matInput [email]="true" placeholder="E-mail address" name="email" [(ngModel)]="user.email" #email="ngModel" maxlength="50" required>
+        <mat-hint align="end">{{email.value?.length || 0}}/50</mat-hint>
+        <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+          <mat-error *ngIf="email.errors['required']">Email is required</mat-error>
+          <mat-error *ngIf="email.errors['email']">Not a valid email</mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="register-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="user.passWord" #password="ngModel"
+          maxlength="50" [pattern]="patternPassword" required>
+        <mat-hint align="end">{{password.value?.length || 0}}/50</mat-hint>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+          <mat-error *ngIf="password.invalid && password.errors['required']">Password is required</mat-error>
+          <mat-error *ngIf="password.invalid && password.errors['pattern']">
+            Passwords must be at least 8 characters Passwords must have at least one lowercase ('a'-'z') Passwords must have at least
+            one uppercase ('A'-'Z') Passwords must have at least one digit ('0'-'9') Passwords must have at least one non
+            alphanumeric character
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="register-full-width">
+        <mat-label>Confirm password</mat-label>
+        <input matInput placeholder="Confirm password" [type]="hide1 ? 'password' : 'text'" name="passwordConfirm" ngModel #passwordConfirm="ngModel"
+          devil-compare="password" maxlength="50" required>
+        <mat-hint align="end">{{passwordConfirm.value?.length || 0}}/50</mat-hint>
+        <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="passwordConfirm.invalid && (passwordConfirm.dirty || passwordConfirm.touched)">
+          <mat-error *ngIf="passwordConfirm.errors['required']">Password confirm is required</mat-error>
+          <mat-error *ngIf="passwordConfirm.errors['compare']">Password confirm do not match</mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <section class="gender-section">
+        <label class="gender-margin">Gender:</label>
+        <mat-radio-group>
+          <mat-radio-button class="gender-margin" value="0" checked="true">Male</mat-radio-button>
+          <mat-radio-button class="gender-margin" value="1">Female</mat-radio-button>
+        </mat-radio-group>
+      </section>
+
+      <mat-form-field appearance="outline" class="register-full-width">
+        <mat-label>Roles</mat-label>
+        <mat-select placeholder="Roles" [formControl]="rolesControl"  multiple required>
+          <mat-select-trigger>
+            {{rolesControl.value ? rolesControl.value[0] : ''}}
+            <span *ngIf="rolesControl.value?.length > 1" class="example-additional-selection">
+              (+{{rolesControl.value.length - 1}} {{rolesControl.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let role of roleslist" [value]="role.name">{{role.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="rolesControl.invalid && (rolesControl.dirty || rolesControl.touched)"> Roles is required</mat-error>
+      </mat-form-field>
+      <!-- <devil-tree-checklist *ngIf="rolesData" [rolesData]="rolesData"></devil-tree-checklist> -->
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button mat-fab color="primary" matTooltip="Save" [disabled]="userForm.invalid" [mat-dialog-close]="data.animal"
+      cdkFocusInitial>
+      <mat-icon>save</mat-icon>
+    </button>
+    <button mat-button mat-fab color="warn" matTooltip="Cancel" matTooltipPosition="above" (click)="onNoClick()">
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-dialog-actions>
+</form>

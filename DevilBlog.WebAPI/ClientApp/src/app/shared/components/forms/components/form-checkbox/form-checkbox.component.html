@@ -1,0 +1,6 @@
+<section [formGroup]="formGroup">
+  <mat-checkbox [formControlName]="config.name" class="checkbox-margin">
+    {{ config.label }}</mat-checkbox
+  >
+  <mat-error devilFormFieldError [fieldConfig]="config"></mat-error>
+</section>

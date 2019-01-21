@@ -1,0 +1,9 @@
+$devil-nature-primary: mat-palette($mat-brown, 700, 300, 900);
+$devil-nature-accent: mat-palette($mat-deep-purple, 300);
+$devil-nature-warn: mat-palette($mat-red, 600);
+
+$devil-nature-theme: mat-light-theme(
+  $devil-nature-primary,
+  $devil-nature-accent,
+  $devil-nature-warn
+);

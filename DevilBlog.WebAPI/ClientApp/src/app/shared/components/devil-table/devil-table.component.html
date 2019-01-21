@@ -1,0 +1,153 @@
+<mat-card class="devi-table-container mat-elevation-z8">
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-card-title>
+      <h2>
+        <mat-label>{{ options?.title ? options.title : "Table" }}</mat-label>
+      </h2>
+    </mat-card-title>
+
+    <button
+      mat-fab
+      color="primary"
+      matTooltip="{{ options?.add_toolTip ? options.add_toolTip : 'Create' }}"
+      matTooltipPosition="above"
+      (click)="addNew($event)"
+    >
+      <mat-icon>{{
+        options?.add_icon ? options.add_icon : "add_circle"
+      }}</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- Loading -->
+    <div
+      class="devil-table-loading-shade"
+      *ngIf="isLoadingResults || isRateLimitReached"
+    >
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+        GitHub's API rate limit has been reached. It will be reset in one
+        minute.
+      </div>
+    </div>
+    <!-- Filter -->
+    <mat-form-field *ngIf="options?.filter ? options.filter : false">
+      <input
+        matInput
+        (keyup)="applyFilter($event.target.value)"
+        placeholder="Filter"
+      />
+    </mat-form-field>
+    <div class="devil-table-container">
+      <mat-table #table [dataSource]="dataSource" matSort>
+        <!-- Checkbox Column -->
+        <ng-container
+          *ngIf="
+            options?.disableCheckBox != undefined
+              ? !options.disableCheckBox
+              : false
+          "
+          matColumnDef="select"
+        >
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+            >
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="checkBoxClick($event, row)"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)"
+            >
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Main rows -->
+        <ng-container
+          *ngFor="let column of options?.columns"
+          [cdkColumnDef]="column.columnsDef"
+        >
+          <mat-header-cell
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            [disabled]="!options.sortHeader"
+          >
+            {{ column.headerCell }}
+          </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let row">
+            {{ row[column.columnsDef] }}
+          </mat-cell>
+        </ng-container>
+        <!-- Star Column -->
+        <ng-container
+          *ngIf="
+            options?.disableEditing != undefined
+              ? options.disableEditing : false"
+          matColumnDef="star"
+          stickyEnd
+        >
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element; let i = index" class="stickyEnd">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editClick(element, i)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voicemail</span>
+              </button>
+              <button mat-menu-item (click)="deleteClick(element, i)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
+        <!-- Header -->
+        <mat-header-row
+          *matHeaderRowDef="options?.displayedColumns"
+        ></mat-header-row>
+        <mat-row
+          mat-row
+          *matRowDef="let row; columns: options?.displayedColumns"
+        ></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div fxLayout="row" fxLayout.xs="column" fxFlexFill>
+      <div fxFlex="45" fxFlex.xs="50">
+        <button
+          mat-fab
+          matTooltip="Delete selected"
+          color="warn"
+          *ngIf="selection?.hasValue()"
+          (click)="multipleDelete()"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      <!-- <button mat-fab color="primary">SHARE</button> -->
+      </div>
+      <!-- Pagges -->
+      <div fxFlex="55" fxLayoutAlign="center end">
+        <mat-paginator
+          #paginator
+          [pageSize]="pageSizeDefault"
+          [pageSizeOptions]="options?.pageSizeOptions"
+          [showFirstLastButtons]="options?.showFirstLastButtons"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </mat-card-actions>
+</mat-card>

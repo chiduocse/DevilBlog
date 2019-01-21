@@ -1,0 +1,4 @@
+<form [formGroup]="form" #formRef="ngForm" (submit)="onSubmit($event)">
+  <ng-container *ngFor="let field of config" devilFormField [config]="field">
+  </ng-container>
+</form>

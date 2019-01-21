@@ -1,0 +1,31 @@
+.register-full-width {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+mat-form-field.mat-form-field {
+    font-size: 13px;
+}
+
+.avatar-user{
+    width: 120px;
+    height: 120px;;
+}
+
+mat-radio-group.mat-radio-group {
+    font-size: 13px;
+}
+
+.gender-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.gender-margin {
+    margin-left: 10px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 13px;
+}
